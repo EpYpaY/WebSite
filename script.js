@@ -55,3 +55,73 @@ window.onscroll = () => {
 
 // mix it up 
 var mixer = mixitup('.portfolio-gallery');
+
+// disable scroll bar 
+
+function addMouseWheelHandler(id) {
+  var noscroll = document.getElementById(id);
+  if (noscroll.addEventListener) {
+    // IE9, Chrome, Safari, Opera
+    noscroll.addEventListener("mousewheel", MouseWheelHandler, false);
+    // Firefox
+    noscroll.addEventListener("DOMMouseScroll", MouseWheelHandler, false);
+  } else {
+    // IE 6/7/8
+    noscroll.attachEvent("onmousewheel", MouseWheelHandler);
+  }
+    
+}
+    function MouseWheelHandler(e) {
+        // cross-browser wheel delta
+        var e = window.event || e; // old IE support
+        var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+    
+        if (delta == 1) {
+          // if mouse scrolls up
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+        if (delta == -1) {
+          // if mouse scrolls down, we disable scrolling.
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+        return false;
+    }
+
+
+addMouseWheelHandler("header");
+addMouseWheelHandler("Présentation");
+addMouseWheelHandler("infos");
+addMouseWheelHandler("parcours");
+addMouseWheelHandler("comp");
+addMouseWheelHandler("footer");
+
+var noscrollPR = document.getElementById("projet");
+if (noscrollPR.addEventListener) {
+    // IE9, Chrome, Safari, Opera
+    noscrollPR.addEventListener("mousewheel", MouseWheelHandlerPR, false);
+    // Firefox
+    noscrollPR.addEventListener("DOMMouseScroll", MouseWheelHandlerPR, false);
+}
+// IE 6/7/8
+else 
+    noscrollPR.attachEvent("onmousewheel", MouseWheelHandlerPR);
+
+
+function MouseWheelHandlerPR(e) {
+
+    // cross-browser wheel delta
+    var e = window.event || e; // old IE support
+    var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+
+    if(delta==1)         // if mouse scrolls up
+    {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+    return false;
+}
